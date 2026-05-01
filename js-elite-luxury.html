@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>J's Elite Auto Detail LLC — Bedford, Ohio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --navy:        #050A1A;
+  --navy-2:      #080F24;
+  --navy-3:      #0C1530;
+  --navy-4:      #101B3A;
+  --gold:        #C8992A;
+  --gold-bright: #F0C050;
+  --gold-pale:   #EDD98A;
+  --gold-dim:    #7A5E1A;
+  --champagne:   #F5EDD4;
+  --champagne-dim: rgba(245,237,212,0.55);
+  --teal:        #00C8B4;
+  --teal-dim:    rgba(0,200,180,0.12);
+  --display: 'Cormorant Garamond', Georgia, serif;
+  --body: 'Montserrat', sans-serif;
+}
+html { scroll-behavior: smooth; }
+body { background: var(--navy); color: var(--champagne); font-family: var(--body); overflow-x: hidden; }
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: var(--navy-2); }
+::-webkit-scrollbar-thumb { background: var(--gold-dim); border-radius: 2px; }
+
+/* NAV */
+nav { position:fixed; top:0; left:0; right:0; z-index:200; display:flex; justify-content:space-between; align-items:center; padding:1.5rem 5rem; transition:all 0.4s ease; }
+nav.scrolled { background:rgba(5,10,26,0.96); backdrop-filter:blur(16px); padding:1rem 5rem; border-bottom:1px solid rgba(200,153,42,0.18); }
+.nav-logo { display:flex; flex-direction:column; line-height:1; text-decoration:none; }
+.nav-logo-j { font-family:var(--display); font-size:1.8rem; font-weight:600; color:var(--gold-bright); letter-spacing:0.05em; }
+.nav-logo-sub { font-size:0.52rem; letter-spacing:0.28em; text-transform:uppercase; color:var(--champagne-dim); margin-top:2px; }
+.nav-links { display:flex; gap:2.5rem; list-style:none; align-items:center; }
+.nav-links a { color:var(--champagne-dim); text-decoration:none; font-size:0.68rem; letter-spacing:0.18em; text-transform:uppercase; transition:color 0.25s; }
+.nav-links a:hover { color:var(--gold-bright); }
+.nav-book { border:1px solid var(--gold) !important; color:var(--gold-bright) !important; padding:0.55rem 1.5rem !important; position:relative; overflow:hidden; }
+.nav-book::before { content:''; position:absolute; inset:0; background:var(--gold); transform:scaleX(0); transform-origin:left; transition:transform 0.3s; z-index:-1; }
+.nav-book:hover::before { transform:scaleX(1); }
+.nav-book:hover { color:var(--navy) !important; }
+
+/* HERO */
+.hero { min-height:100vh; position:relative; overflow:hidden; display:flex; align-items:flex-end; }
+.hero-bg { position:absolute; inset:0; background-image:url('https://images.unsplash.com/photo-1544636331-e26879cd4d9b?w=1800&q=85&fit=crop'); background-size:cover; background-position:center 40%; animation:heroZoom 14s ease-in-out infinite alternate; }
+@keyframes heroZoom { from{transform:scale(1.04);} to{transform:scale(1.12);} }
+.hero-overlay { position:absolute; inset:0; background:linear-gradient(to top,rgba(5,10,26,1) 0%,rgba(5,10,26,0.65) 45%,rgba(5,10,26,0.25) 75%,rgba(5,10,26,0.5) 100%),linear-gradient(to right,rgba(5,10,26,0.65) 0%,transparent 65%); }
+.hero-orb { position:absolute; border-radius:50%; filter:blur(80px); pointer-events:none; }
+.orb1 { width:600px; height:600px; background:radial-gradient(circle,rgba(200,153,42,0.15) 0%,transparent 70%); top:-100px; left:-100px; animation:orbF 8s ease-in-out infinite; }
+.orb2 { width:400px; height:400px; background:radial-gradient(circle,rgba(0,200,180,0.1) 0%,transparent 70%); bottom:0; right:0; animation:orbF 10s ease-in-out infinite reverse; }
+@keyframes orbF { 0%,100%{transform:translate(0,0);} 50%{transform:translate(20px,-30px);} }
+.hero-content { position:relative; z-index:2; padding:0 5rem 7rem; max-width:820px; animation:fadeUp 1.2s ease both; }
+@keyframes fadeUp { from{opacity:0;transform:translateY(40px);} to{opacity:1;transform:translateY(0);} }
+.hero-badge { display:inline-flex; align-items:center; gap:0.75rem; background:rgba(200,153,42,0.1); border:1px solid rgba(200,153,42,0.3); padding:0.45rem 1.2rem; margin-bottom:2rem; animation:fadeUp 1.2s 0.1s ease both; }
+.badge-dot { width:6px; height:6px; border-radius:50%; background:var(--teal); box-shadow:0 0 10px var(--teal); animation:pulse 2s infinite; }
+@keyframes pulse { 0%,100%{opacity:1;transform:scale(1);} 50%{opacity:0.5;transform:scale(0.7);} }
+.hero-badge span { font-size:0.62rem; letter-spacing:0.22em; text-transform:uppercase; color:var(--champagne-dim); }
+.hero-title { font-family:var(--display); font-size:clamp(4.5rem,12vw,10rem); font-weight:300; line-height:0.88; color:var(--champagne); margin-bottom:0.15em; animation:fadeUp 1.2s 0.2s ease both; }
+.hero-title em { font-style:italic; background:linear-gradient(135deg,var(--gold) 0%,var(--gold-bright) 50%,var(--gold-pale) 100%); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+.hero-sub-line { font-size:clamp(0.9rem,2vw,1.5rem); font-family:var(--body); font-weight:300; letter-spacing:0.38em; text-transform:uppercase; color:var(--champagne-dim); margin-bottom:1.5rem; animation:fadeUp 1.2s 0.3s ease both; }
+.hero-divider { display:flex; align-items:center; gap:1rem; margin-bottom:1.5rem; animation:fadeUp 1.2s 0.35s ease both; }
+.hdl { width:60px; height:1px; background:linear-gradient(90deg,var(--gold),transparent); }
+.hdr { width:60px; height:1px; background:linear-gradient(90deg,transparent,var(--gold)); }
+.hdd { width:6px; height:6px; background:var(--gold-bright); transform:rotate(45deg); }
+.hero-desc { font-size:0.88rem; font-weight:300; color:var(--champagne-dim); line-height:1.8; max-width:430px; margin-bottom:2.5rem; animation:fadeUp 1.2s 0.4s ease both; }
+.hero-btns { display:flex; gap:1rem; flex-wrap:wrap; animation:fadeUp 1.2s 0.5s ease both; }
+
+.btn-gold { background:linear-gradient(135deg,var(--gold) 0%,var(--gold-bright) 100%); color:var(--navy); padding:1rem 2.8rem; font-family:var(--body); font-size:0.7rem; font-weight:600; letter-spacing:0.2em; text-transform:uppercase; text-decoration:none; border:none; cursor:pointer; position:relative; overflow:hidden; transition:transform 0.2s,box-shadow 0.3s; box-shadow:0 4px 30px rgba(200,153,42,0.35); display:inline-block; }
+.btn-gold:hover { transform:translateY(-2px); box-shadow:0 8px 40px rgba(200,153,42,0.55); }
+.btn-ghost { background:transparent; color:var(--champagne); padding:1rem 2.8rem; font-family:var(--body); font-size:0.7rem; font-weight:300; letter-spacing:0.2em; text-transform:uppercase; text-decoration:none; border:1px solid rgba(245,237,212,0.2); cursor:pointer; transition:all 0.3s; display:inline-block; }
+.btn-ghost:hover { border-color:var(--gold); color:var(--gold-bright); transform:translateY(-2px); }
+
+.scroll-cue { position:absolute; bottom:3rem; right:5rem; z-index:2; display:flex; flex-direction:column; align-items:center; gap:0.6rem; animation:fadeUp 1.2s 0.9s ease both; }
+.scroll-mouse { width:22px; height:36px; border:1.5px solid rgba(200,153,42,0.4); border-radius:11px; position:relative; }
+.scroll-wheel { width:3px; height:8px; background:var(--gold-bright); border-radius:2px; position:absolute; top:6px; left:50%; transform:translateX(-50%); animation:scrollWheel 1.8s ease-in-out infinite; }
+@keyframes scrollWheel { 0%{opacity:1;transform:translateX(-50%) translateY(0);} 100%{opacity:0;transform:translateX(-50%) translateY(12px);} }
+.scroll-lbl { font-size:0.55rem; letter-spacing:0.25em; text-transform:uppercase; color:rgba(200,153,42,0.45); }
+
+/* MARQUEE */
+.marquee-wrap { background:linear-gradient(90deg,var(--gold-dim),var(--gold),var(--gold-bright),var(--gold),var(--gold-dim)); padding:1rem 0; overflow:hidden; white-space:nowrap; }
+.marquee-track { display:inline-flex; animation:marqueeScroll 22s linear infinite; }
+.m-item { font-family:var(--display); font-size:1.1rem; font-weight:300; letter-spacing:0.15em; text-transform:uppercase; color:var(--navy); padding:0 2.5rem; }
+.m-sep { color:rgba(5,10,26,0.35); }
+@keyframes marqueeScroll { from{transform:translateX(0);} to{transform:translateX(-50%);} }
+
+/* STATS */
+.stats { background:var(--navy-2); display:grid; grid-template-columns:repeat(4,1fr); border-bottom:1px solid rgba(200,153,42,0.1); }
+.stat { padding:3rem 2rem; text-align:center; border-right:1px solid rgba(200,153,42,0.08); position:relative; transition:background 0.3s; }
+.stat:last-child { border-right:none; }
+.stat:hover { background:rgba(200,153,42,0.04); }
+.stat::after { content:''; position:absolute; bottom:0; left:0; right:0; height:2px; background:linear-gradient(90deg,transparent,var(--gold),transparent); opacity:0; transition:opacity 0.3s; }
+.stat:hover::after { opacity:1; }
+.stat-val { font-family:var(--display); font-size:3.5rem; font-weight:300; line-height:1; background:linear-gradient(135deg,var(--gold) 0%,var(--gold-bright) 100%); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; margin-bottom:0.4rem; }
+.stat-lbl { font-size:0.62rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--champagne-dim); }
+
+/* SECTION COMMON */
+.eyebrow { display:flex; align-items:center; gap:1rem; margin-bottom:1rem; }
+.eyebrow-line { width:2rem; height:1px; background:linear-gradient(90deg,var(--gold),transparent); }
+.eyebrow-text { font-size:0.62rem; letter-spacing:0.28em; text-transform:uppercase; color:var(--gold); }
+.sec-title { font-family:var(--display); font-size:clamp(3rem,6vw,5.5rem); font-weight:300; line-height:0.95; letter-spacing:-0.01em; margin-bottom:1.5rem; }
+.sec-title em { font-style:italic; background:linear-gradient(135deg,var(--gold),var(--gold-bright)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+.sec-desc { font-size:0.85rem; font-weight:300; color:var(--champagne-dim); line-height:1.9; }
+
+/* GALLERY */
+.gallery-section { padding:0; background:var(--navy); overflow:hidden; }
+.gallery-title-wrap { padding:6rem 5rem 3rem; }
+.gallery-strip { display:grid; grid-template-columns:2fr 1fr 1fr 1.5fr; grid-template-rows:320px 260px; gap:3px; }
+.gal-item { position:relative; overflow:hidden; cursor:pointer; }
+.gal-item img { width:100%; height:100%; object-fit:cover; transition:transform 0.7s cubic-bezier(0.23,1,0.32,1),filter 0.5s; filter:brightness(0.72) saturate(1.15); }
+.gal-item:hover img { transform:scale(1.09); filter:brightness(0.9) saturate(1.4); }
+.gal-overlay { position:absolute; inset:0; background:linear-gradient(to top,rgba(5,10,26,0.85) 0%,transparent 55%); opacity:0; transition:opacity 0.4s; display:flex; align-items:flex-end; padding:1.75rem; }
+.gal-item:hover .gal-overlay { opacity:1; }
+.gal-label { font-family:var(--display); font-size:1.15rem; font-style:italic; color:var(--gold-bright); letter-spacing:0.05em; }
+.gal-item:nth-child(1) { grid-column:1; grid-row:1/3; }
+.gal-item:nth-child(2) { grid-column:2; grid-row:1; }
+.gal-item:nth-child(3) { grid-column:3; grid-row:1; }
+.gal-item:nth-child(4) { grid-column:4; grid-row:1; }
+.gal-item:nth-child(5) { grid-column:2/4; grid-row:2; }
+.gal-item:nth-child(6) { grid-column:4; grid-row:2; }
+
+/* SERVICES */
+#services { padding:8rem 5rem; background:var(--navy-2); position:relative; overflow:hidden; }
+#services::before { content:'DETAIL'; position:absolute; top:3rem; right:3rem; font-family:var(--display); font-size:9rem; font-weight:600; color:rgba(200,153,42,0.04); letter-spacing:0.1em; pointer-events:none; user-select:none; }
+.services-intro { display:grid; grid-template-columns:1.2fr 1fr; gap:4rem; align-items:end; margin-bottom:4rem; }
+.services-layout { display:grid; grid-template-columns:1fr 1fr; gap:1.5px; background:rgba(200,153,42,0.08); }
+.svc { background:var(--navy-2); padding:3rem; position:relative; overflow:hidden; transition:background 0.4s; display:flex; flex-direction:column; }
+.svc:hover { background:var(--navy-3); }
+.svc::before { content:''; position:absolute; top:-60px; right:-60px; width:220px; height:220px; border-radius:50%; background:radial-gradient(circle,rgba(200,153,42,0.1) 0%,transparent 70%); opacity:0; transition:opacity 0.5s; pointer-events:none; }
+.svc:hover::before { opacity:1; }
+.svc-img { width:100%; height:190px; object-fit:cover; margin-bottom:1.75rem; filter:brightness(0.72) saturate(1.1); transition:filter 0.4s; }
+.svc:hover .svc-img { filter:brightness(0.9) saturate(1.3); }
+.svc-num { font-family:var(--display); font-size:5rem; font-weight:300; color:rgba(200,153,42,0.07); line-height:1; position:absolute; top:1.5rem; right:2rem; transition:color 0.3s; }
+.svc:hover .svc-num { color:rgba(200,153,42,0.15); }
+.svc-tag { display:inline-flex; align-items:center; gap:0.5rem; margin-bottom:1rem; align-self:flex-start; }
+.svc-tag-dot { width:5px; height:5px; border-radius:50%; background:var(--teal); }
+.svc-tag-text { font-size:0.6rem; letter-spacing:0.22em; text-transform:uppercase; color:var(--teal); }
+.svc-tag.gold .svc-tag-dot { background:var(--gold-bright); }
+.svc-tag.gold .svc-tag-text { color:var(--gold-bright); }
+.svc-tag.rose .svc-tag-dot { background:#E85C7A; }
+.svc-tag.rose .svc-tag-text { color:#E85C7A; }
+.svc-name { font-family:var(--display); font-size:2.4rem; font-weight:300; line-height:1.1; color:var(--champagne); margin-bottom:0.5rem; }
+.svc-price strong { font-family:var(--display); font-size:1.8rem; font-weight:300; background:linear-gradient(135deg,var(--gold) 0%,var(--gold-bright) 100%); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+.svc-price .was { font-size:0.85rem; text-decoration:line-through; color:rgba(245,237,212,0.3); margin-left:0.5rem; font-family:var(--body); }
+.svc-duration { font-size:0.68rem; letter-spacing:0.18em; text-transform:uppercase; color:var(--champagne-dim); margin:0.25rem 0 1.25rem; }
+.svc-desc { font-size:0.8rem; font-weight:300; color:var(--champagne-dim); line-height:1.8; margin-bottom:1.75rem; flex:1; }
+.svc-variants { display:flex; flex-direction:column; gap:0.6rem; margin-bottom:1.75rem; }
+.svc-variant { display:flex; justify-content:space-between; align-items:center; padding:0.7rem 1rem; border:1px solid rgba(200,153,42,0.12); text-decoration:none; transition:all 0.25s; background:rgba(200,153,42,0.03); }
+.svc-variant:hover { border-color:rgba(200,153,42,0.4); background:rgba(200,153,42,0.08); transform:translateX(4px); }
+.svc-variant-name { font-size:0.78rem; color:var(--champagne); font-weight:300; }
+.svc-variant-right { display:flex; align-items:center; gap:0.75rem; }
+.svc-variant-price { font-family:var(--display); font-size:1rem; background:linear-gradient(135deg,var(--gold),var(--gold-bright)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+.svc-variant-arrow { font-size:0.75rem; color:var(--gold-dim); transition:color 0.2s,transform 0.2s; }
+.svc-variant:hover .svc-variant-arrow { color:var(--gold-bright); transform:translateX(3px); }
+.svc-link { display:inline-flex; align-items:center; gap:0.6rem; font-size:0.65rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--gold); text-decoration:none; align-self:flex-start; padding-bottom:2px; border-bottom:1px solid rgba(200,153,42,0.3); transition:all 0.25s; }
+.svc-link:hover { color:var(--gold-bright); border-color:var(--gold-bright); gap:1rem; }
+.svc-premium { grid-column:1/-1; display:grid !important; grid-template-columns:1fr 1.2fr; gap:3rem; background:var(--navy-3) !important; }
+.svc-premium::after { content:''; position:absolute; inset:0; background:linear-gradient(135deg,rgba(200,153,42,0.05) 0%,transparent 60%); pointer-events:none; }
+.svc-premium-img { width:100%; height:250px; object-fit:cover; margin-bottom:1.75rem; filter:brightness(0.72) saturate(1.15); transition:filter 0.4s; }
+.svc:hover .svc-premium-img { filter:brightness(0.9) saturate(1.4); }
+
+/* ADD-ONS */
+.addons-section { background:var(--navy-4); border-top:1px solid rgba(200,153,42,0.1); border-bottom:1px solid rgba(200,153,42,0.1); padding:2.5rem 5rem; display:flex; align-items:center; gap:2.5rem; flex-wrap:wrap; }
+.addons-label { font-size:0.6rem; letter-spacing:0.25em; text-transform:uppercase; color:var(--gold); flex-shrink:0; }
+.addons-vr { width:1px; height:2rem; background:rgba(200,153,42,0.2); flex-shrink:0; }
+.addons-pills { display:flex; gap:0.75rem; flex-wrap:wrap; }
+.addon { display:flex; align-items:center; gap:0.75rem; border:1px solid rgba(200,153,42,0.15); padding:0.55rem 1.1rem; font-size:0.75rem; font-weight:300; color:var(--champagne-dim); text-decoration:none; transition:all 0.25s; }
+.addon:hover { border-color:var(--gold); color:var(--gold-bright); background:rgba(200,153,42,0.07); }
+.addon-price { font-family:var(--display); background:linear-gradient(135deg,var(--gold),var(--gold-bright)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; font-size:0.95rem; }
+
+/* PROCESS */
+#process { padding:8rem 5rem; background:var(--navy); position:relative; overflow:hidden; }
+.process-layout { display:grid; grid-template-columns:1fr 1fr; gap:6rem; align-items:start; margin-top:4rem; }
+.process-steps { display:flex; flex-direction:column; }
+.p-step { display:flex; gap:1.5rem; padding:2rem 0; border-bottom:1px solid rgba(245,237,212,0.06); transition:all 0.3s; }
+.p-step:hover { border-color:rgba(200,153,42,0.2); }
+.p-num { font-family:var(--display); font-size:2.8rem; font-weight:300; background:linear-gradient(135deg,var(--gold-dim),rgba(200,153,42,0.2)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; flex-shrink:0; width:3rem; line-height:1.1; transition:all 0.3s; }
+.p-step:hover .p-num { background:linear-gradient(135deg,var(--gold),var(--gold-bright)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+.p-title { font-family:var(--display); font-size:1.5rem; font-weight:400; color:var(--champagne); margin-bottom:0.4rem; }
+.p-desc { font-size:0.8rem; font-weight:300; color:var(--champagne-dim); line-height:1.8; }
+.includes-card { background:var(--teal-dim); border:1px solid rgba(0,200,180,0.15); padding:2rem; margin-top:1.5rem; }
+.includes-title { font-size:0.62rem; letter-spacing:0.22em; text-transform:uppercase; color:var(--teal); margin-bottom:1.25rem; }
+.inc-row { display:flex; align-items:flex-start; gap:0.75rem; padding:0.6rem 0; border-bottom:1px solid rgba(0,200,180,0.08); }
+.inc-row:last-child { border-bottom:none; }
+.inc-check { width:16px; height:16px; flex-shrink:0; background:rgba(0,200,180,0.15); border:1px solid rgba(0,200,180,0.3); display:flex; align-items:center; justify-content:center; margin-top:1px; }
+.inc-check::after { content:'✓'; font-size:0.6rem; color:var(--teal); }
+.inc-text { font-size:0.8rem; font-weight:300; color:var(--champagne-dim); line-height:1.5; }
+.process-img-wrap { position:sticky; top:8rem; }
+.process-img { width:100%; height:480px; object-fit:cover; filter:brightness(0.78) saturate(1.15); border:1px solid rgba(200,153,42,0.15); }
+.process-img-caption { padding:1rem 1.25rem; background:var(--navy-3); border:1px solid rgba(200,153,42,0.1); border-top:none; font-family:var(--display); font-style:italic; font-size:1rem; color:var(--champagne-dim); }
+
+/* CAR STRIP */
+.cars-strip { padding:6rem 5rem; background:var(--navy-2); }
+.cars-strip-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:3px; margin-top:3rem; }
+.car-strip-item { position:relative; overflow:hidden; height:300px; }
+.car-strip-item img { width:100%; height:100%; object-fit:cover; filter:brightness(0.65) saturate(1.1); transition:all 0.65s cubic-bezier(0.23,1,0.32,1); }
+.car-strip-item:hover img { filter:brightness(0.88) saturate(1.5); transform:scale(1.06); }
+.car-strip-overlay { position:absolute; inset:0; background:linear-gradient(to top,rgba(5,10,26,0.9) 0%,transparent 55%); display:flex; flex-direction:column; justify-content:flex-end; padding:1.75rem; }
+.car-strip-name { font-family:var(--display); font-size:1.6rem; font-weight:300; font-style:italic; color:var(--champagne); margin-bottom:0.25rem; }
+.car-strip-sub { font-size:0.62rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--gold); }
+
+/* LOCATION */
+#location { padding:8rem 5rem; background:var(--navy); }
+.loc-layout { display:grid; grid-template-columns:1fr 1fr; gap:5rem; margin-top:4rem; align-items:center; }
+.loc-info { display:flex; flex-direction:column; gap:2.5rem; }
+.loc-label { font-size:0.58rem; letter-spacing:0.25em; text-transform:uppercase; color:var(--gold); margin-bottom:0.5rem; display:flex; align-items:center; gap:0.6rem; }
+.loc-label::after { content:''; flex:1; height:1px; background:linear-gradient(90deg,rgba(200,153,42,0.3),transparent); }
+.loc-val { font-family:var(--display); font-size:1.4rem; font-weight:300; color:var(--champagne); line-height:1.4; }
+.loc-val a { color:var(--champagne); text-decoration:none; border-bottom:1px solid rgba(200,153,42,0.25); transition:all 0.25s; }
+.loc-val a:hover { color:var(--gold-bright); border-color:var(--gold-bright); }
+.map-card { background:var(--navy-3); border:1px solid rgba(200,153,42,0.12); height:380px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:1.5rem; position:relative; overflow:hidden; text-decoration:none; cursor:pointer; transition:border-color 0.3s; }
+.map-card:hover { border-color:rgba(200,153,42,0.35); }
+.map-grid { position:absolute; inset:0; background-image:linear-gradient(rgba(200,153,42,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(200,153,42,0.04) 1px,transparent 1px); background-size:40px 40px; }
+.map-glow { position:absolute; inset:0; background:radial-gradient(circle at 50% 50%,rgba(200,153,42,0.06) 0%,transparent 70%); }
+.map-pin { width:52px; height:52px; border:2px solid var(--gold); border-radius:50% 50% 50% 0; transform:rotate(-45deg); position:relative; box-shadow:0 0 20px rgba(200,153,42,0.3); z-index:2; transition:box-shadow 0.3s; }
+.map-card:hover .map-pin { box-shadow:0 0 40px rgba(200,153,42,0.55); }
+.map-pin::after { content:''; position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); width:14px; height:14px; background:var(--gold-bright); border-radius:50%; }
+.map-addr { position:relative; z-index:2; text-align:center; }
+.map-addr1 { font-family:var(--display); font-size:1.1rem; font-weight:300; color:var(--champagne); letter-spacing:0.05em; margin-bottom:0.25rem; }
+.map-addr2 { font-size:0.65rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--gold); }
+.map-btn { position:relative; z-index:2; font-size:0.62rem; letter-spacing:0.18em; text-transform:uppercase; color:var(--gold); border:1px solid rgba(200,153,42,0.3); padding:0.5rem 1.2rem; transition:all 0.25s; }
+.map-card:hover .map-btn { border-color:var(--gold); background:rgba(200,153,42,0.08); }
+
+/* CTA */
+.cta-section { position:relative; overflow:hidden; min-height:520px; display:flex; align-items:center; }
+.cta-bg { position:absolute; inset:0; background-image:url('https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=1800&q=85&fit=crop'); background-size:cover; background-position:center; filter:brightness(0.3) saturate(0.85); }
+.cta-bg-overlay { position:absolute; inset:0; background:linear-gradient(135deg,rgba(5,10,26,0.75) 0%,rgba(5,10,26,0.4) 100%); }
+.cta-orb { position:absolute; top:-100px; left:-100px; width:500px; height:500px; border-radius:50%; background:radial-gradient(circle,rgba(200,153,42,0.12) 0%,transparent 70%); pointer-events:none; }
+.cta-orb2 { position:absolute; bottom:-80px; right:10%; width:300px; height:300px; border-radius:50%; background:radial-gradient(circle,rgba(0,200,180,0.08) 0%,transparent 70%); pointer-events:none; }
+.cta-content { position:relative; z-index:2; padding:7rem 5rem; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:3rem; width:100%; }
+.cta-title { font-family:var(--display); font-size:clamp(3rem,6vw,6rem); font-weight:300; line-height:0.9; color:var(--champagne); margin-bottom:0.75rem; }
+.cta-title em { font-style:italic; background:linear-gradient(135deg,var(--gold),var(--gold-bright)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+.cta-sub { font-size:0.82rem; font-weight:300; color:var(--champagne-dim); letter-spacing:0.05em; }
+.cta-actions { display:flex; flex-direction:column; gap:1rem; align-items:flex-end; }
+.cta-note { font-size:0.62rem; letter-spacing:0.12em; color:var(--champagne-dim); }
+
+/* FOOTER */
+footer { background:var(--navy); border-top:1px solid rgba(200,153,42,0.1); padding:3rem 5rem; }
+.footer-top { display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:2rem; padding-bottom:2rem; border-bottom:1px solid rgba(245,237,212,0.06); }
+.footer-logo-j { font-family:var(--display); font-size:1.6rem; font-weight:600; background:linear-gradient(135deg,var(--gold),var(--gold-bright)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; letter-spacing:0.05em; }
+.footer-logo-sub { font-size:0.5rem; letter-spacing:0.28em; text-transform:uppercase; color:var(--champagne-dim); display:block; margin-top:2px; }
+.footer-links { display:flex; gap:2rem; flex-wrap:wrap; }
+.footer-link { font-size:0.65rem; letter-spacing:0.15em; text-transform:uppercase; color:var(--champagne-dim); text-decoration:none; transition:color 0.2s; }
+.footer-link:hover { color:var(--gold-bright); }
+.footer-bottom { display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1rem; padding-top:2rem; }
+.footer-copy { font-size:0.68rem; font-weight:300; color:rgba(245,237,212,0.25); }
+.footer-tagline { font-family:var(--display); font-size:0.9rem; font-style:italic; color:rgba(200,153,42,0.35); }
+
+/* MOBILE */
+@media (max-width:960px) {
+  nav { padding:1.2rem 1.5rem; }
+  nav.scrolled { padding:0.9rem 1.5rem; }
+  .nav-links { display:none; }
+  .hero-content { padding:0 1.5rem 6rem; }
+  .scroll-cue { right:1.5rem; }
+  .gallery-title-wrap,#services,#process,#location,.cars-strip { padding:5rem 1.5rem; }
+  .gallery-strip { grid-template-columns:1fr 1fr; grid-template-rows:repeat(3,220px); }
+  .gal-item:nth-child(1) { grid-column:1/3; grid-row:1; }
+  .gal-item:nth-child(2) { grid-column:1; grid-row:2; }
+  .gal-item:nth-child(3) { grid-column:2; grid-row:2; }
+  .gal-item:nth-child(4) { grid-column:1; grid-row:3; }
+  .gal-item:nth-child(5) { grid-column:2; grid-row:3; }
+  .gal-item:nth-child(6) { display:none; }
+  .stats { grid-template-columns:repeat(2,1fr); }
+  .services-intro { grid-template-columns:1fr; gap:1.5rem; }
+  .services-layout { grid-template-columns:1fr; }
+  .svc-premium { grid-template-columns:1fr !important; }
+  .process-layout { grid-template-columns:1fr; }
+  .cars-strip-grid { grid-template-columns:1fr; }
+  .loc-layout { grid-template-columns:1fr; gap:3rem; }
+  .cta-content { padding:5rem 1.5rem; flex-direction:column; }
+  .cta-actions { align-items:flex-start; }
+  .addons-section { padding:2rem 1.5rem; }
+  footer { padding:2.5rem 1.5rem; }
+  #services::before { display:none; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="nav">
+  <a class="nav-logo" href="#">
+    <span class="nav-logo-j">J's Elite</span>
+    <span class="nav-logo-sub">Auto Detail LLC</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#gallery">Gallery</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#process">Process</a></li>
+    <li><a href="#location">Location</a></li>
+    <li><a href="https://jseliteautodetail.setmore.com/" target="_blank" class="nav-book">Book Now</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-overlay"></div>
+  <div class="orb1 hero-orb"></div>
+  <div class="orb2 hero-orb"></div>
+  <div class="hero-content">
+    <div class="hero-badge">
+      <div class="badge-dot"></div>
+      <span>Now Accepting Bookings · Bedford, Ohio</span>
+    </div>
+    <h1 class="hero-title"><em>Elite</em></h1>
+    <div class="hero-sub-line">Auto Detailing LLC</div>
+    <div class="hero-divider"><div class="hdl"></div><div class="hdd"></div><div class="hdr"></div></div>
+    <p class="hero-desc">Where precision meets passion. We restore, protect, and transform every vehicle into a showroom masterpiece — inside and out.</p>
+    <div class="hero-btns">
+      <a class="btn-gold" href="https://jseliteautodetail.setmore.com/" target="_blank">Book Your Detail</a>
+      <a class="btn-ghost" href="#services">Explore Services</a>
+    </div>
+  </div>
+  <div class="scroll-cue">
+    <div class="scroll-mouse"><div class="scroll-wheel"></div></div>
+    <span class="scroll-lbl">Scroll</span>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-wrap">
+  <div class="marquee-track">
+    <span class="m-item">Mini Detail Special <span class="m-sep">✦</span></span>
+    <span class="m-item">Basic Detail <span class="m-sep">✦</span></span>
+    <span class="m-item">Brand New Package <span class="m-sep">✦</span></span>
+    <span class="m-item">Leather Protection <span class="m-sep">✦</span></span>
+    <span class="m-item">Under Carriage Wash <span class="m-sep">✦</span></span>
+    <span class="m-item">Headliner Touch-Up <span class="m-sep">✦</span></span>
+    <span class="m-item">J's Elite Auto Detail LLC <span class="m-sep">✦</span></span>
+    <span class="m-item">Bedford, Ohio 44146 <span class="m-sep">✦</span></span>
+    <span class="m-item">Mini Detail Special <span class="m-sep">✦</span></span>
+    <span class="m-item">Basic Detail <span class="m-sep">✦</span></span>
+    <span class="m-item">Brand New Package <span class="m-sep">✦</span></span>
+    <span class="m-item">Leather Protection <span class="m-sep">✦</span></span>
+    <span class="m-item">Under Carriage Wash <span class="m-sep">✦</span></span>
+    <span class="m-item">Headliner Touch-Up <span class="m-sep">✦</span></span>
+    <span class="m-item">J's Elite Auto Detail LLC <span class="m-sep">✦</span></span>
+    <span class="m-item">Bedford, Ohio 44146 <span class="m-sep">✦</span></span>
+  </div>
+</div>
+
+<!-- STATS -->
+<div class="stats">
+  <div class="stat"><div class="stat-val">$150</div><div class="stat-lbl">Starting Price</div></div>
+  <div class="stat"><div class="stat-val">3+</div><div class="stat-lbl">Service Packages</div></div>
+  <div class="stat"><div class="stat-val">4.5h</div><div class="stat-lbl">Premium Service</div></div>
+  <div class="stat"><div class="stat-val">100%</div><div class="stat-lbl">Satisfaction</div></div>
+</div>
+
+<!-- GALLERY -->
+<section id="gallery" class="gallery-section">
+  <div class="gallery-title-wrap">
+    <div class="eyebrow"><div class="eyebrow-line"></div><span class="eyebrow-text">The Cars We Love</span></div>
+    <h2 class="sec-title">Built for<br><em>Perfection</em></h2>
+  </div>
+  <div class="gallery-strip">
+    <div class="gal-item">
+      <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=900&q=90&fit=crop" alt="Sports car" loading="lazy">
+      <div class="gal-overlay"><span class="gal-label">Showroom Finish</span></div>
+    </div>
+    <div class="gal-item">
+      <img src="https://images.unsplash.com/photo-1544636331-e26879cd4d9b?w=600&q=85&fit=crop" alt="Supercar" loading="lazy">
+      <div class="gal-overlay"><span class="gal-label">Precision Detail</span></div>
+    </div>
+    <div class="gal-item">
+      <img src="https://images.unsplash.com/photo-1619767886558-efdc259cde1a?w=600&q=85&fit=crop" alt="Luxury car" loading="lazy">
+      <div class="gal-overlay"><span class="gal-label">Pure Luxury</span></div>
+    </div>
+    <div class="gal-item">
+      <img src="https://images.unsplash.com/photo-1494976388531-d1058494cdd8?w=700&q=85&fit=crop" alt="Sports car" loading="lazy">
+      <div class="gal-overlay"><span class="gal-label">Elite Treatment</span></div>
+    </div>
+    <div class="gal-item">
+      <img src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=900&q=85&fit=crop" alt="Porsche" loading="lazy">
+      <div class="gal-overlay"><span class="gal-label">Restored to Glory</span></div>
+    </div>
+    <div class="gal-item">
+      <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=700&q=85&fit=crop" alt="Luxury auto" loading="lazy">
+      <div class="gal-overlay"><span class="gal-label">Your Car. Reborn.</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="services-intro">
+    <div>
+      <div class="eyebrow"><div class="eyebrow-line"></div><span class="eyebrow-text">What We Offer</span></div>
+      <h2 class="sec-title">Our<br><em>Services</em></h2>
+    </div>
+    <p class="sec-desc">From a quick refresh to a complete showroom-ready transformation — every package is handled with obsessive craft and professional-grade products.</p>
+  </div>
+  <div class="services-layout">
+
+    <!-- MINI -->
+    <div class="svc">
+      <img class="svc-img" src="https://images.unsplash.com/photo-1596986793583-1e0b1bd65093?w=800&q=80&fit=crop" alt="Car wash detail" loading="lazy">
+      <div class="svc-num">01</div>
+      <div class="svc-tag"><div class="svc-tag-dot"></div><span class="svc-tag-text">Most Popular · Special Price</span></div>
+      <div class="svc-name">Mini Detail<br>Special</div>
+      <div class="svc-price"><strong>$150</strong><span class="was">$180</span></div>
+      <div class="svc-duration">45 Minutes</div>
+      <p class="svc-desc">The perfect quick-turnaround service. Get your car looking immaculate in under an hour — essential cleaning, polished result, zero compromise.</p>
+      <a class="svc-link" href="https://jseliteautodetail.setmore.com/j?step=additional-products&products=20f853a8-1fd1-4125-9f32-4c83a048fe52&type=service&staff=002ed97c-2e93-46df-81f4-72cd11bf0239&staffSelected=false" target="_blank">Book This Service →</a>
+    </div>
+
+    <!-- BASIC -->
+    <div class="svc">
+      <img class="svc-img" src="https://images.unsplash.com/photo-1520340356584-f9917d1eea6f?w=800&q=80&fit=crop" alt="Interior detail" loading="lazy">
+      <div class="svc-num">02</div>
+      <div class="svc-tag gold"><div class="svc-tag-dot"></div><span class="svc-tag-text">Full Detail — 3 Options</span></div>
+      <div class="svc-name">Basic<br>Detail</div>
+      <div class="svc-price"><strong>From $157</strong></div>
+      <div class="svc-duration">3 Hours 30 Minutes</div>
+      <p class="svc-desc">A thorough, professional clean inside, outside, or the full treatment. Choose your scope — we'll bring it back to life.</p>
+      <div class="svc-variants">
+        <a class="svc-variant" href="https://jseliteautodetail.setmore.com/j?step=additional-products&products=925389a9-1665-40d3-a85f-1069582fa79a&type=service&staff=002ed97c-2e93-46df-81f4-72cd11bf0239&staffSelected=false" target="_blank">
+          <span class="svc-variant-name">Full Detail (Inside + Outside)</span>
+          <span class="svc-variant-right"><span class="svc-variant-price">$300</span><span class="svc-variant-arrow">→</span></span>
+        </a>
+        <a class="svc-variant" href="https://jseliteautodetail.setmore.com/j?step=additional-products&products=5a4f5c07-13c0-4ef5-8bc7-5bf02eb9d6a2&type=service&staff=002ed97c-2e93-46df-81f4-72cd11bf0239&staffSelected=false" target="_blank">
+          <span class="svc-variant-name">Inside Only</span>
+          <span class="svc-variant-right"><span class="svc-variant-price">$200.92</span><span class="svc-variant-arrow">→</span></span>
+        </a>
+        <a class="svc-variant" href="https://jseliteautodetail.setmore.com/j?step=additional-products&products=2422a843-5de8-40c0-8190-5c9b62a26f40&type=service&staff=002ed97c-2e93-46df-81f4-72cd11bf0239&staffSelected=false" target="_blank">
+          <span class="svc-variant-name">Outside Only</span>
+          <span class="svc-variant-right"><span class="svc-variant-price">$157.57</span><span class="svc-variant-arrow">→</span></span>
+        </a>
+      </div>
+    </div>
+
+    <!-- PREMIUM -->
+    <div class="svc svc-premium">
+      <div>
+        <img class="svc-premium-img" src="https://images.unsplash.com/photo-1525609004556-c46c7d6cf023?w=900&q=85&fit=crop" alt="Supercar premium detail" loading="lazy">
+        <div class="svc-num" style="position:relative;top:auto;right:auto;margin-bottom:1rem;">03</div>
+        <div class="svc-tag rose"><div class="svc-tag-dot"></div><span class="svc-tag-text">Premium Package</span></div>
+        <div class="svc-name">Brand New<br>Package</div>
+        <div class="svc-price"><strong>From $243</strong></div>
+        <div class="svc-duration">4 Hours 30 Minutes</div>
+        <p class="svc-desc" style="max-width:360px;">The ultimate transformation. We treat your vehicle like it just rolled off the showroom floor — meticulous, obsessive, flawless.</p>
+      </div>
+      <div style="display:flex;flex-direction:column;justify-content:flex-end;gap:1rem;">
+        <a class="svc-variant" href="https://jseliteautodetail.setmore.com/j?step=additional-products&products=1dc1490c-1c15-483a-8318-df0817dd6b6c&type=service&staff=002ed97c-2e93-46df-81f4-72cd11bf0239&staffSelected=false" target="_blank">
+          <span class="svc-variant-name">Brand New — Inside Only</span>
+          <span class="svc-variant-right"><span class="svc-variant-price">$243.22</span><span class="svc-variant-arrow">→</span></span>
+        </a>
+        <a class="svc-variant" href="https://jseliteautodetail.setmore.com/j?step=additional-products&products=107b934f-5957-4131-ae7e-000935db8a93&type=service&staff=002ed97c-2e93-46df-81f4-72cd11bf0239&staffSelected=false" target="_blank">
+          <span class="svc-variant-name">Brand New — Outside Only</span>
+          <span class="svc-variant-right"><span class="svc-variant-price">$249.00</span><span class="svc-variant-arrow">→</span></span>
+        </a>
+        <div style="margin-top:1.25rem;">
+          <a class="btn-gold" href="https://jseliteautodetail.setmore.com/" target="_blank">Book Premium Package →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ADD-ONS -->
+<div class="addons-section">
+  <span class="addons-label">Add-Ons</span>
+  <div class="addons-vr"></div>
+  <div class="addons-pills">
+    <a class="addon" href="https://jseliteautodetail.setmore.com/j?step=additional-products&products=cebab994-4323-4119-be83-649be760040f&type=service&staff=002ed97c-2e93-46df-81f4-72cd11bf0239&staffSelected=false" target="_blank">Headliner Touch-Up <span class="addon-price">+$25</span></a>
+    <a class="addon" href="https://jseliteautodetail.setmore.com/j?step=additional-products&products=0460a813-fffb-4d25-bf28-04fd0ba756da&type=service&staff=002ed97c-2e93-46df-81f4-72cd11bf0239&staffSelected=false" target="_blank">Leather Protection <span class="addon-price">+$25</span></a>
+    <a class="addon" href="https://jseliteautodetail.setmore.com/j?step=additional-products&products=07708c79-4405-49c6-951d-70608566a122&type=service&staff=002ed97c-2e93-46df-81f4-72cd11bf0239&staffSelected=false" target="_blank">Under Carriage Wash <span class="addon-price">+$20</span></a>
+    <a class="addon" href="https://jseliteautodetail.setmore.com/j?step=additional-products&products=ea87f35f-46f4-4f1b-af7d-a273a40dc30b&type=service&staff=002ed97c-2e93-46df-81f4-72cd11bf0239&staffSelected=false" target="_blank">Under Carriage Wash (Other) <span class="addon-price">+$15</span></a>
+  </div>
+</div>
+
+<!-- PROCESS -->
+<section id="process">
+  <div class="eyebrow"><div class="eyebrow-line"></div><span class="eyebrow-text">How It Works</span></div>
+  <h2 class="sec-title">Our<br><em>Process</em></h2>
+  <div class="process-layout">
+    <div class="process-steps">
+      <div class="p-step"><div class="p-num">01</div><div><div class="p-title">Book Online</div><p class="p-desc">Select your service, choose your time, confirm — done in under 2 minutes. No calls, no waiting.</p></div></div>
+      <div class="p-step"><div class="p-num">02</div><div><div class="p-title">Drop It Off</div><p class="p-desc">Bring your vehicle to 120 Broadway Ave, Bedford. We assess and align before a single product is touched.</p></div></div>
+      <div class="p-step"><div class="p-num">03</div><div><div class="p-title">Expert Detailing</div><p class="p-desc">Every inch treated with professional-grade products and elite technique. We work until it's perfect.</p></div></div>
+      <div class="p-step"><div class="p-num">04</div><div><div class="p-title">Drive Away Proud</div><p class="p-desc">Your vehicle leaves looking brand new. We're not satisfied until you are — that's the J's Elite standard.</p></div></div>
+      <div class="includes-card">
+        <div class="includes-title">Every Service Includes</div>
+        <div class="inc-row"><div class="inc-check"></div><span class="inc-text">Professional-grade, premium products</span></div>
+        <div class="inc-row"><div class="inc-check"></div><span class="inc-text">Experienced, detail-obsessed technicians</span></div>
+        <div class="inc-row"><div class="inc-check"></div><span class="inc-text">100% satisfaction guarantee</span></div>
+        <div class="inc-row"><div class="inc-check"></div><span class="inc-text">Transparent pricing — zero hidden fees</span></div>
+        <div class="inc-row"><div class="inc-check"></div><span class="inc-text">Easy online booking &amp; scheduling</span></div>
+      </div>
+    </div>
+    <div class="process-img-wrap">
+      <img class="process-img" src="https://images.unsplash.com/photo-1607860108855-64acf2078ed9?w=900&q=85&fit=crop" alt="Professional car detailing" loading="lazy">
+      <div class="process-img-caption">"We work until it's perfect — not just passable."</div>
+    </div>
+  </div>
+</section>
+
+<!-- CAR TYPE STRIP -->
+<section class="cars-strip">
+  <div class="eyebrow"><div class="eyebrow-line"></div><span class="eyebrow-text">Every Type. Every Detail.</span></div>
+  <h2 class="sec-title">We Detail<br><em>Them All</em></h2>
+  <div class="cars-strip-grid">
+    <div class="car-strip-item">
+      <img src="https://images.unsplash.com/photo-1616422285623-13ff0162193c?w=800&q=85&fit=crop" alt="Exotic supercar" loading="lazy">
+      <div class="car-strip-overlay">
+        <div class="car-strip-name">Exotics &amp; Supercars</div>
+        <div class="car-strip-sub">Ferrari · Lamborghini · McLaren</div>
+      </div>
+    </div>
+    <div class="car-strip-item">
+      <img src="https://images.unsplash.com/photo-1511919884226-fd3cad34687c?w=800&q=85&fit=crop" alt="Luxury sedan" loading="lazy">
+      <div class="car-strip-overlay">
+        <div class="car-strip-name">Luxury Sedans</div>
+        <div class="car-strip-sub">BMW · Mercedes · Audi</div>
+      </div>
+    </div>
+    <div class="car-strip-item">
+      <img src="https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?w=800&q=85&fit=crop" alt="Everyday vehicle" loading="lazy">
+      <div class="car-strip-overlay">
+        <div class="car-strip-name">Everyday Rides</div>
+        <div class="car-strip-sub">Every Make · Every Model</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LOCATION -->
+<section id="location">
+  <div class="eyebrow"><div class="eyebrow-line"></div><span class="eyebrow-text">Find Us</span></div>
+  <h2 class="sec-title">Visit Our<br><em>Shop</em></h2>
+  <div class="loc-layout">
+    <div class="loc-info">
+      <div>
+        <div class="loc-label">Address</div>
+        <div class="loc-val"><a href="https://www.google.com/maps/search/?api=1&query=120+Broadway+Avenue%2C+Bedford%2C+Ohio%2C+44146" target="_blank">120 Broadway Avenue<br>Bedford, Ohio 44146</a></div>
+      </div>
+      <div>
+        <div class="loc-label">Business</div>
+        <div class="loc-val">J's Elite Auto Detail LLC</div>
+      </div>
+      <div>
+        <div class="loc-label">Online Booking</div>
+        <div class="loc-val"><a href="https://jseliteautodetail.setmore.com/" target="_blank">Book your appointment →</a></div>
+      </div>
+    </div>
+    <a class="map-card" href="https://www.google.com/maps/search/?api=1&query=120+Broadway+Avenue%2C+Bedford%2C+Ohio%2C+44146" target="_blank">
+      <div class="map-grid"></div>
+      <div class="map-glow"></div>
+      <div class="map-pin"></div>
+      <div class="map-addr"><div class="map-addr1">120 Broadway Avenue</div><div class="map-addr2">Bedford, Ohio 44146</div></div>
+      <div class="map-btn">Open in Google Maps →</div>
+    </a>
+  </div>
+</section>
+
+<!-- CTA -->
+<div class="cta-section">
+  <div class="cta-bg"></div>
+  <div class="cta-bg-overlay"></div>
+  <div class="cta-orb"></div>
+  <div class="cta-orb2"></div>
+  <div class="cta-content">
+    <div>
+      <div class="cta-title">Your Car<br>Deserves<br><em>Elite.</em></div>
+      <p class="cta-sub">Book in minutes. Results that last.</p>
+    </div>
+    <div class="cta-actions">
+      <a class="btn-gold" href="https://jseliteautodetail.setmore.com/" target="_blank" style="font-size:0.72rem;padding:1.1rem 3rem;">Book Your Detail Now →</a>
+      <span class="cta-note">Online booking available 24/7</span>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div>
+      <div class="footer-logo-j">J's Elite Auto Detail LLC</div>
+      <span class="footer-logo-sub">Bedford, Ohio · Premium Detailing</span>
+    </div>
+    <div class="footer-links">
+      <a class="footer-link" href="#gallery">Gallery</a>
+      <a class="footer-link" href="#services">Services</a>
+      <a class="footer-link" href="#process">Process</a>
+      <a class="footer-link" href="#location">Location</a>
+      <a class="footer-link" href="https://jseliteautodetail.setmore.com/" target="_blank">Book Now</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span class="footer-copy">© 2025 J's Elite Auto Detail LLC · 120 Broadway Avenue, Bedford, Ohio 44146</span>
+    <span class="footer-tagline">Elite results, every time.</span>
+  </div>
+</footer>
+
+<script>
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 80);
+  }, { passive: true });
+</script>
+</body>
+</html>
